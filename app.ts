@@ -72,7 +72,10 @@ app.get("/messages/:recipient", (req: Request, res: Response) => {
 
   const recipientMessages = messages[recipient] || [];
   if (messages[recipient].length > 0) {
-    const selectedMessages = recipientMessages.slice(start, stop);
+    const selectedMessages = recipientMessages.slice(
+      Math.abs(start),
+      Math.abs(stop)
+    );
     return res.status(200).json(selectedMessages);
   } else {
     return res.status(404).send("No messages");
